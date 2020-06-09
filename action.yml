@@ -1,0 +1,11 @@
+name: "Contreebutors"
+description: "Deploys a Webiny project"
+inputs:
+  working-directory:
+    description: "Set a custom working directory (defaults to project root)."
+    required: false
+    default: "."
+runs:
+  using: node12
+  main: dist/main/index.js
+  post: dist/post/index.js
