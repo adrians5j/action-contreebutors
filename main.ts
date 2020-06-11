@@ -8,7 +8,6 @@ const { GitHub, context } = require('@actions/github');
     // 1. Extract a list of users from received commits.
     const token = process.env.GH_TOKEN;
 
-
     const pr = result.data.length > 0 && result.data[0];
 
     core.setOutput('pr', pr && pr.number || '');
@@ -25,7 +24,6 @@ const { GitHub, context } = require('@actions/github');
     }
 
     // 3. Commit changes done on the `contreebutors.json` and `README.md` file.
-
     // 4. Add comment to the merged PR - notify the user that he was added to the contributors list.
 
 })();
