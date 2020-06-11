@@ -17,7 +17,6 @@ const { GitHub, context } = require('@actions/github');
 
     const pr = result.data.length > 0 && result.data[0];
 
-
     core.setOutput('pr', pr && pr.number || '');
     core.setOutput('number', pr && pr.number || '');
     core.setOutput('title', pr && pr.title || '');
