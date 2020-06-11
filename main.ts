@@ -5,6 +5,7 @@ const { GitHub, context } = require('@actions/github');
     const core = require("@actions/core");
     const exec = require("@actions/exec");
 
+
     // 1. Extract a list of users from received commits.
     const token = process.env.GH_TOKEN;
 
