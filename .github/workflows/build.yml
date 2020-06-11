@@ -1,7 +1,7 @@
 name: Build
 
 on:
-  push:
+  pull_request:
     branches: [ master ]
 
 env:
@@ -9,9 +9,9 @@ env:
 
 jobs:
   build-test-release:
-    name: Build, test and release
+    name: Conventional Commits
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - uses: doitadrian/action-conventional-commits@master
+      - uses: webiny/action-conventional-commits@v1.0.0
