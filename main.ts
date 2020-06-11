@@ -25,6 +25,7 @@ const { GitHub, context } = require('@actions/github');
         await contreebutors.add(user);
     }
 
+
     // 3. Commit changes done on the `contreebutors.json` and `README.md` file.
 
     // 4. Add comment to the merged PR - notify the user that he was added to the contributors list.
