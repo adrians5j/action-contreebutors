@@ -15,6 +15,7 @@ const { GitHub, context } = require('@actions/github');
         commit_sha: context.sha,
     });
 
+    // 2. I'm testing commits for a GitHub action. This comment will be removed.
     const pr = result.data.length > 0 && result.data[0];
 
     core.setOutput('pr', pr && pr.number || '');
