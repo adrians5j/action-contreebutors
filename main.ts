@@ -8,12 +8,6 @@ const { GitHub, context } = require('@actions/github');
     // 1. Extract a list of users from received commits.
     const token = process.env.GH_TOKEN;
 
-    const client = new GitHub(token, {});
-    const result = await client.repos.listPullRequestsAssociatedWithCommit({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        commit_sha: context.sha,
-    });
 
     const pr = result.data.length > 0 && result.data[0];
 
