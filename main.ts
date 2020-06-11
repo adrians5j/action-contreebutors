@@ -1,33 +1,38 @@
-const prepareEnvFiles = require("./scripts/prepareEnvFiles");
-const pingUntilDeployed = require("./scripts/pingUntilDeployed");
+import { Contreebutors } from "contreebutors";
+const { GitHub, context } = require('@actions/github');
 
 (async () => {
     const core = require("@actions/core");
     const exec = require("@actions/exec");
 
-    try {
-        core.startGroup("Deploying Webiny Project");
+    // 1. Extract a list of users from received commits.
+    const token = process.env.GH_TOKEN;
 
-        core.info(`Preparing ".env.json" files...`);
-        await prepareEnvFiles();
+    const client = new GitHub(token, {});
+    const result = await client.repos.listPullRequestsAssociatedWithCommit({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        commit_sha: context.sha,
+    });
 
-        core.info(`✨ Deploying API...`);
-        await exec.exec("node ../node_modules/@webiny/cli/bin.js deploy-api --env dev --debug", [], {
-            cwd: "./examples"
-        });
+    const pr = result.data.length > 0 && result.data[0];
 
-        core.info(`✨ Deploying Apps...`);
-        await exec.exec("node ../node_modules/@webiny/cli/bin.js deploy-apps --env dev --debug", [], {
-            cwd: "./examples"
-        });
+    core.setOutput('pr', pr && pr.number || '');
+    core.setOutput('number', pr && pr.number || '');
+    core.setOutput('title', pr && pr.title || '');
+    core.setOutput('body', pr && pr.body || '');
 
-        /*core.info(`⏳ Waiting for the project to become available...`);
-        await pingUntilDeployed();*/
 
-        core.info(`🎉 Project deployed and ready.`);
+    // 2. Add them to the list.
+    const contreebutors = new Contreebutors();
 
-        core.endGroup();
-    } catch (e) {
-        core.setFailed(e.message);
+    for (let i = 0; i < users.length; i++) {
+        let user = users[i];
+        await contreebutors.add(user);
     }
+
+    // 3. Commit changes done on the `contreebutors.json` and `README.md` file.
+
+    // 4. Add comment to the merged PR - notify the user that he was added to the contributors list.
+
 })();
