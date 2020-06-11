@@ -16,6 +16,7 @@ const { GitHub, context } = require('@actions/github');
         commit_sha: context.sha,
     });
 
+
     const pr = result.data.length > 0 && result.data[0];
 
     core.setOutput('pr', pr && pr.number || '');
