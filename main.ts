@@ -17,7 +17,6 @@ const { GitHub, context } = require('@actions/github');
     core.setOutput('title', pr && pr.title || '');
     core.setOutput('body', pr && pr.body || '');
 
-
     // 2. Add them to the list.
     const contreebutors = new Contreebutors();
 
