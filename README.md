@@ -1,21 +1,27 @@
-# Hello world javascript action
+# Conventional Commits GitHub Action
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+A simple GitHub action that makes sure all commit messages are following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) specification.
 
-## Inputs
+![Screenshot](/docs/screenshot.png)
 
-### `who-to-greet`
+Note that, typically, you would make this check on a pre-commit hook (for example, using something like [Commitlint](https://commitlint.js.org/)), but those can easily be skipped, hence this GitHub action.
 
-**Required** The name of the person to greet. Default `"World"`.
+### Usage
+Latest version: `v1.0.2`
 
-## Outputs
+```yml
+name: Conventional Commits
 
-### `time`
+on:
+  pull_request:
+    branches: [ master ]
 
-The time we greeted you.
+jobs:
+  build:
+    name: Conventional Commits
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
 
-## Example usage
-
-uses: actions/hello-world-javascript-action@v1
-with:
-  who-to-greet: 'Mona the Octocat'
+      - uses: webiny/action-contreebutors@v1.0.2
+```
