@@ -26,6 +26,8 @@ async function run() {
             hasErrors = true;
         }*/
     }
+    await exec.exec("git", ["config", "user.name", "Contreebutors"]);
+    await exec.exec("git", ["config", "user.email", "noreply@something.com"]);
 
     await exec.exec("git", ["add", "./README.md"]);
     await exec.exec("git", ["add", "./contreebutors.json"]);

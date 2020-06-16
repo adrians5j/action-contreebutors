@@ -19246,6 +19246,8 @@ function run() {
                 hasErrors = true;
             }*/
         }
+        yield exec.exec("git", ["config", "user.name", "Contreebutors"]);
+        yield exec.exec("git", ["config", "user.email", "noreply@something.com"]);
         yield exec.exec("git", ["add", "./README.md"]);
         yield exec.exec("git", ["add", "./contreebutors.json"]);
         yield exec.exec("git", ["commit", "-m", "chore: update contributors"]);
