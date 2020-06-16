@@ -2,6 +2,7 @@ const core = require("@actions/core");
 const { context } = require("@actions/github");
 import { Contreebutors } from "contreebutors";
 import extractCommits from "./extractCommits";
+const exec = require("@actions/exec");
 
 async function run() {
     core.info(`ℹ️ Checking for new contributors...`);
@@ -12,12 +13,12 @@ async function run() {
         return;
     }
 
-    console.log('dobeo commitove', JSON.stringify(extractedCommits, null, 2))
+    console.log("dobeo commitove", JSON.stringify(extractedCommits, null, 2));
     const contreebutors = new Contreebutors();
 
     for (let i = 0; i < extractedCommits.length; i++) {
         let commit = extractedCommits[i];
-        await contreebutors.add({ username: "kobaja" });
+        await contreebutors.add({ username: commit.author.username });
         /*if (isValidCommitMessage(commit.message)) {
             core.info(`✅ ${commit.message}`);
         } else {
@@ -26,6 +27,7 @@ async function run() {
         }*/
     }
 
+    await exec.exec("git diff", []);
     core.info("🎉 Done.");
 }
 
