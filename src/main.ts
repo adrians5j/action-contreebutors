@@ -29,6 +29,8 @@ async function run() {
 
     await exec.exec("git", ["add", "./README.md"]);
     await exec.exec("git", ["add", "./contreebutors.json"]);
+    await exec.exec("git", ["commit", "-m", "chore: update contributors"]);
+    await exec.exec("git", ["push"]);
     await exec.exec("git", ["diff"]);
     core.info("🎉 Done.");
 }
