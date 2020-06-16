@@ -1,13 +1,10 @@
-const { context } = require("@actions/github");
 const core = require("@actions/core");
-
-import isValidCommitMessage from "./isValidCommitMesage";
+const { context } = require("@actions/github");
+import { Contreebutors } from "contreebutors";
 import extractCommits from "./extractCommits";
 
 async function run() {
-    core.info(
-        `ℹ️ Checking if commit messages are following the Conventional Commits specification...`
-    );
+    core.info(`ℹ️ Checking for new contributors...`);
 
     const extractedCommits = await extractCommits(context);
     if (extractedCommits.length === 0) {
@@ -15,26 +12,21 @@ async function run() {
         return;
     }
 
-    let hasErrors;
-    core.startGroup("Commit messages:");
+    console.log('dobeo commitove', JSON.stringify(extractedCommits, null, 2))
+    const contreebutors = new Contreebutors();
+
     for (let i = 0; i < extractedCommits.length; i++) {
         let commit = extractedCommits[i];
-        if (isValidCommitMessage(commit.message)) {
+        await contreebutors.add({ username: "kobaja" });
+        /*if (isValidCommitMessage(commit.message)) {
             core.info(`✅ ${commit.message}`);
         } else {
             core.info(`🚩 ${commit.message}`);
             hasErrors = true;
-        }
+        }*/
     }
-    core.endGroup();
 
-    if (hasErrors) {
-        core.setFailed(
-            `🚫 According to the conventional-commits specification, some of the commit messages are not valid.`
-        );
-    } else {
-        core.info("🎉 All commit messages are following the Conventional Commits specification.");
-    }
+    core.info("🎉 Done.");
 }
 
 run();
