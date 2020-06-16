@@ -19246,7 +19246,9 @@ function run() {
                 hasErrors = true;
             }*/
         }
-        yield exec.exec("git diff", []);
+        yield exec.exec("git", ["add", "./README.md"]);
+        yield exec.exec("git", ["add", "./contreebutors.md"]);
+        yield exec.exec("git", ["diff"]);
         core.info("🎉 Done.");
     });
 }

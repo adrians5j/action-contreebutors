@@ -27,7 +27,9 @@ async function run() {
         }*/
     }
 
-    await exec.exec("git diff", []);
+    await exec.exec("git", ["add", "./README.md"]);
+    await exec.exec("git", ["add", "./contreebutors.md"]);
+    await exec.exec("git", ["diff"]);
     core.info("🎉 Done.");
 }
 
